@@ -1,0 +1,2 @@
+'use strict';
+angular.module('AngularApp', ['ngRoute', 'ngStorage', 'routes', 'loginCtrl', 'searchRoasterCtrl', 'addRoasterCtrl', 'editRoasterCtrl', 'addProfileCtrl', 'editProfileCtrl', 'searchProfileCtrl', 'directive', 'angularjs-datetime-picker', 'multipleSelect', 'ui.filter', 'ui.bootstrap', 'changePassCtrl', 'newRegCntrl', 'myProfileCtrl', 'myRosterCtrl', 'myRequestCtrl', 'searchAllowanceCtrl', 'addAllowanceCtrl', 'editAllowanceCtrl', 'myAllowanceCtrl']);

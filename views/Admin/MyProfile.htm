@@ -1,0 +1,118 @@
+﻿<title>{{pageTitle}}</title>
+<div class="loader-container">
+    <div loader working="working" message="Loading..." template="5"></div>
+    <form class="jumbotron" name="editUserForm" novalidate>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h4 style="margin-top: -4%; font-weight: bold;">
+                        <span class="glyphicon glyphicon-user">
+                        </span>&nbsp;My Profile
+                    </h4>
+                    <div id="lineDiv" class="repeaterLogo"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4">
+                    <div class="form-group" show-errors>
+                        <input type="text" name="firstName" ng-model="firstName" class="form-control" placeholder="First Name" required>
+                        <p class="help-block" ng-if="editUserForm.firstName.$error.required">Please enter First Name</p>
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="form-group" show-errors>
+                        <input type="text" name="lastName" ng-model="lastName" class="form-control" placeholder="Last Name" required>
+                        <p class="help-block" ng-if="editUserForm.lastName.$error.required">Please enter Last Name</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4">
+                    <div class="form-group" show-errors>
+                        <input type="text" name="employeeId" ng-model="employeeId" class="form-control" placeholder="Employee Id" id="employeeId" required>
+                        <p class="help-block" ng-if="editUserForm.employeeId.$error.required">Please enter Employee Id</p>
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="form-group" show-errors>
+                        <input type="email" name="emailAddress" ng-model="emailAddress" class="form-control" placeholder="Email Address" required>
+                        <p class="help-block" ng-if="editUserForm.emailAddress.$error.required">Please enter Email Address</p>
+                        <p class="help-block" ng-if="editUserForm.emailAddress.$error.email">Please enter valid Email Address</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4">
+                    <div class="form-group" show-errors>
+                        <input type="text" name="contactNumber" class="form-control" ng-model="contactNumber" placeholder="Contact Number" id="contactNumber" required>
+                        <p class="help-block" ng-if="editUserForm.contactNumber.$error.required">Please enter Contact Number</p>
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="form-group">
+                        <input type="text" name="altContactNumber" class="form-control" ng-model="altContactNumber" placeholder="Alternate Contact Number" id="altContactNumber">                        
+                    </div>
+                </div>
+            </div>            
+            <div class="row">
+                <div class="col-xs-4">
+                    <div class="form-group" show-errors>
+                        <input type="text" name="address1" ng-model="address1" class="form-control" placeholder="Address 1" required>
+                        <p class="help-block" ng-if="editUserForm.address1.$error.required">Please enter Address 1</p>
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <input type="text" class="form-control" ng-model="address2" placeholder="Address 2">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4">
+                    <input type="text" name="landmark" ng-model="landmark" class="form-control" placeholder="Location">
+                </div>
+                <div class="col-xs-4">
+                    <div class="form-group" show-errors>
+                        <input type="text" name="city" class="form-control" ng-model="city" placeholder="City" required>
+                        <p class="help-block" ng-if="editUserForm.city.$error.required">Please enter City</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4">
+                    <div class="form-group" show-errors>
+                        <input type="text" id="zipCode" name="zip" class="form-control" ng-model="zip" placeholder="Zip" required>
+                        <p class="help-block" ng-if="editUserForm.zip.$error.required">Please enter Zip</p>
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <input type="text" name="country" class="form-control" ng-model="country" placeholder="Country" readonly>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4">
+                    <div class="form-group" show-errors>
+                        <select class="form-control" name="team" ng-model="team" ng-disabled="true" ng-options="teamNm.TeamName for teamNm in teamLst track by teamNm.Team_Id" ng-change="loadManagerList(team.Team_Id)" required>
+                            <option value=""><-- select a team --></option>
+                        </select>
+                        <p class="help-block" ng-if="editUserForm.team.$error.required">Please select a Team</p>
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <input type="text" name="manager" class="form-control" ng-model="manager" placeholder="Manager" readonly>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4">
+                    <div class="form-group" show-errors>
+                        <select class="form-control" name="role" ng-model="roleInfo" ng-disabled="true" ng-selected="roleInfo" ng-options="roleNm.RoleName for roleNm in roleLst track by roleNm.Role_Id" required>
+                            <option value=""><-- select a role --></option>
+                        </select>
+                        <p class="help-block" ng-if="editUserForm.role.$error.required">Please select a role</p>
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <p class="submit"><button ng-click="submit()" class="btn btn-primary">Update</button></p>
+                </div>
+            </div>          
+        </div>
+    </form><!--/ Edit Profile-->
+</div>

@@ -1,0 +1,227 @@
+<title>{{pageTitle}}</title>
+<div class="loader-container">
+    <div loader working="working" message="Loading..." template="5"></div>
+    <form class="jumbotron" name="addAttendanceForm" novalidate>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h4 style="margin-top: -4%; font-weight: bold;">
+                        <span class="glyphicon glyphicon-calendar">
+                        </span>&nbsp;Add Roster
+                    </h4>
+                    <div id="lineDiv" class="repeaterLogo"></div>
+                </div>
+            </div>
+            <div class="row" ng-show="! notAdmin">
+                <div class="col-xs-4">
+                    <label>
+                        Bulk Entry
+                    </label>
+                    <input id="switch-size" name="my-checkbox" type="checkbox" data-off-text="OFF" data-size="mini">
+                </div>
+            </div>
+            <br />
+            <div id="singleEntry" class="ng-cloak">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <div class="form-group" show-errors>
+                            <input type="text" name="employeeId" class="form-control" placeholder="Employee Id"
+                                   ng-model="employeeId" ng-readonly="notAdmin" id="employeeId" uib-typeahead="empId.EmployeeId for empId in searchLst | filter:$viewValue | limitTo:5 | unique:'EmployeeId'" tab-key="loadProfileDetails()" ng-required="! validateBulkLst">
+                            <p class="help-block" ng-if="addAttendanceForm.employeeId.$error.required">
+                                Please enter Employee Id
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-xs-4">
+                        <input type="email" name="emailAddress" class="form-control" placeholder="Email Address"
+                               ng-model="emailAddress" readonly>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-4">
+                        <input type="text" name="firstName" class="form-control" placeholder="First Name"
+                               ng-model="firstName" readonly>
+                    </div>
+                    <div class="col-xs-4">
+
+                        <input type="text" name="lastName" class="form-control" placeholder="Last Name" ng-model="lastName"
+                               readonly>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-xs-4">
+                        <div class="form-group" show-errors>
+                            <input type="text" name="startDate" class="form-control" placeholder="From Date" ng-model="startDate" uib-datepicker-popup="{{format}}" datepicker-options="dateOptions" is-open="startOpened" ng-click="openStartDateControl()" ng-required="! validateBulkLst" style="cursor: pointer; background-color: #fff;" readonly />
+                            <p class="help-block" ng-if="addAttendanceForm.startDate.$error.required">
+                                Please enter from date
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-xs-4">
+                        <div class="form-group" show-errors>
+                            <input type="text" name="endDate" class="form-control" placeholder="To Date" ng-model="endDate" uib-datepicker-popup="{{format}}" datepicker-options="dateOptions" is-open="endOpened" ng-click="openEndDateControl()" ng-required="! validateBulkLst" style="cursor: pointer; background-color: #fff;" readonly />                            
+                            <p class="help-block" ng-if="addAttendanceForm.endDate.$error.required">
+                                Please enter to date and to date must be greater / equal to from date
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-4">
+                        <div class="form-group" show-errors>
+                            <select class="form-control" name="shift" ng-model="shift" ng-options="shiftNm.ShiftName for shiftNm in shiftLst track by shiftNm.Shift_Id"
+                                    ng-required="! validateBulkLst">
+                                <option value=""><-- select a shift --></option>
+                            </select>
+                            <p class="help-block" ng-if="addAttendanceForm.shift.$error.required">
+                                Please select a Shift
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-xs-4">
+                        <p class="submit">
+                            <button ng-click="addAttendance()" class="btn btn-primary">
+                                Add
+                            </button>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="bulkEntry" class="ng-cloak">
+            <div class="row">
+                <div class="col-xs-4">
+                    <div class="form-group" show-errors>
+                        <select class="form-control" name="team" ng-model="addAttendance.Teams" ng-options="teamNm.TeamName for teamNm in teamLst track by teamNm.Team_Id"
+                                ng-required="validateBulkLst">
+                            <option value=""><-- select a team --></option>
+                        </select>
+                        <p class="help-block" ng-if="addAttendanceForm.team.$error.required">
+                            Please select a Team
+                        </p>
+                    </div>
+                </div>
+                <div class="col-xs-6" ng-show="showReportingMgr">
+                    <div class="form-group">
+                        <label>Reporting Manager:</label>
+                        <label ng-bind="ReportingMgr"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12" ng-show="displaySearch">
+                    <div id="empDetailsTbl" ng-switch="(pagedItems).length">
+                        <span ng-switch-when="0">No Employees found</span>
+                        <table class="table table-striped table-bordered thead-inverse" style="border-style: solid;" ng-switch-default>
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Select Employee
+                                    </th>
+                                    <th>
+                                        Employee Id
+                                    </th>
+                                    <th>
+                                        First Name
+                                    </th>
+                                    <th>
+                                        Last Name
+                                    </th>
+                                    <th>
+                                        Email Address
+                                    </th>
+                                    <th>
+                                        From Date
+                                    </th>
+                                    <th>
+                                        To Date
+                                    </th>
+                                    <th>
+                                        Shift
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="emp in pagedItems[currentPage]">
+                                    <td>
+                                        <input type="checkbox" ng-attr-id="{{ 'chkBox_' + emp.EmployeeId }}" ng-model="empployeeChk[emp.EmployeeId]">
+                                    </td>
+                                    <td>
+                                        {{emp.EmployeeId}}
+                                    </td>
+                                    <td>
+                                        {{emp.FirstName}}
+                                    </td>
+                                    <td>
+                                        {{emp.LastName}}
+                                    </td>
+                                    <td>
+                                        {{emp.EmailAddress}}
+                                    </td>
+                                    <td>
+                                        <div class="form-group" show-errors>
+                                            <input type="text" name="fromDate" class="form-control" ng-attr-id="{{ 'fromDt_' + emp.EmployeeId }}" placeholder="From Date" date-format="MM-dd-yyyy"
+                                                   datetime-picker ng-model="newFrmDtObj[emp.EmployeeId]" date-only readonly style="cursor: pointer;">
+                                            <p class="help-block" ng-if="addAttendanceForm.fromDate.$error.required">
+                                                Please enter start date
+                                            </p>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-group" show-errors>
+                                            <input type="text" name="toDate" class="form-control" ng-attr-id="{{ 'toDt_' + emp.EmployeeId }}" placeholder="To Date" date-format="MM-dd-yyyy"
+                                                   datetime-picker ng-model="newToDtObj[emp.EmployeeId]" date-only readonly style="cursor: pointer;">
+                                            <p class="help-block" ng-if="addAttendanceForm.toDate.$error.required">
+                                                Please enter end date and end date must be greater / equal to start date
+                                            </p>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-group" show-errors>
+                                            <select class="form-control" name="shift" ng-model="newShftObj[emp.EmployeeId]" ng-attr-id="{{ 'drpShf_' + emp.EmployeeId }}" ng-options="shiftNm.ShiftName for shiftNm in shiftLst track by shiftNm.Shift_Id">
+                                                <option value=""><-- select a shift --></option>
+                                            </select>
+                                            <p class="help-block" ng-if="addAttendanceForm.shift.$error.required">
+                                                Please select a Shift
+                                            </p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                            <td colspan="8">
+                                <ul class="pagination pull-right">
+                                    <li ng-class="{disabled: currentPage == 0}">
+                                        <a href ng-click="prevPage()">« Prev</a>
+                                    </li>
+                                    <li ng-repeat="n in range(pagedItems.length, currentPage, currentPage + gap)" ng-class="{active: n == currentPage}"
+                                        ng-click="setPage()"><a href ng-bind="n + 1">1</a></li>
+                                    <li ng-class="{disabled: currentPage == pagedItems.length - 1}">
+                                        <a href ng-click="nextPage()">
+                                            Next »
+                                        </a>
+                                    </li>
+                                </ul>
+                            </td>
+                            </tfoot>
+                        </table>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-xs-4">
+                    <p class="submit">
+                        <button ng-click="addBulkAttendance()" class="btn btn-primary">
+                            Add
+                        </button>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </form>
+    <!--/ Search-->
+</div>

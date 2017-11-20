@@ -1,0 +1,102 @@
+<title>{{pageTitle}}</title>
+<div class="loader-container">
+    <div loader working="working" message="Loading..." template="5"></div>
+    <form class="jumbotron" name="searchForm" novalidate>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h4 style="margin-top: -4%; font-weight: bold;">
+                        <span class="glyphicon glyphicon-search">
+                        </span>&nbsp;Search Roster
+                    </h4>
+                    <div id="lineDiv" class="repeaterLogo"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="container-fluid col-xs-4">
+                    <input type="text" class="form-control" placeholder="First Name" uib-typeahead="firstNm.FirstName for firstNm in searchLst | filter:$viewValue | limitTo:5 | unique:'FirstName'" ng-model="firstName">
+                </div>
+                <div class="col-xs-4">
+                    <input type="text" class="form-control" placeholder="Last Name" uib-typeahead="lastNm.LastName for lastNm in searchLst | filter:$viewValue | limitTo:5 | unique:'LastName'" ng-model="lastName">
+                </div>
+                <div class="col-xs-4">
+                    <select class="form-control" name="shift" ng-model="searchForm.Shift" ng-options="shiftNm.ShiftName for shiftNm in shiftLst track by shiftNm.Shift_Id">
+                        <option value="">All</option>
+                    </select>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-xs-4">
+                    <input type="email" class="form-control" placeholder="Email Address" uib-typeahead="emailAd.EmailAddress for emailAd in searchLst | filter:$viewValue | limitTo:5 | unique:'EmailAddress'" ng-model="emailAddress">
+                </div>
+                <div class="col-xs-4">
+                    <input type="text" class="form-control" placeholder="From Date" ng-model="startDate" uib-datepicker-popup="{{format}}" datepicker-options="dateOptions" is-open="startOpened" ng-click="openStartDateControl()" style="cursor: pointer; background-color: #fff;" readonly>
+                </div>
+                <div class="col-xs-4">
+                    <input type="text" class="form-control" placeholder="To Date" ng-model="endDate" uib-datepicker-popup="{{format}}" datepicker-options="dateOptions" is-open="endOpened" ng-click="openEndDateControl()" style="cursor: pointer; background-color: #fff;" readonly>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-xs-4">
+                    <p class="submit"><button class="btn btn-primary" ng-click="submit()">Search</button></p>
+                </div>
+                <div class="col-xs-4">
+                    <p class="submit"><button class="btn btn-primary" ng-click="reset()">Reset</button></p>
+                </div>
+                <div class="col-xs-4">
+                    <p class="submit"><button class="btn btn-primary" ng-click="exportData()">Export</button></p>
+                </div>
+            </div>
+        </div>
+    </form><!--/ Search-->
+
+    <div ng-switch="(pagedItems).length" ng-show="showRoasterGrid">
+        <span ng-switch-when="0" style="color: #EEEEEE;font-weight:bold;">No Roster found</span>
+        <table class="table table-striped  thead-inverse center-table" style="background-color: #EEEEEE; border-radius:6px; width:76% !important" ng-attribute-id="roasterTable" ng-switch-default>
+            <thead>
+                <tr>
+                    <th>Employee Id</th>
+                    <th>Name</th>
+                    <th>Email Address</th>
+                    <th>Team</th>
+                    <th>Manager</th>
+                    <th>From Date</th>
+                    <th>To Date</th>
+                    <th>Shift</th>
+                    <th ng-show="notReportAdmin">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="emp in pagedItems[currentPage]">
+                    <td>{{emp.EmployeeId}}</td>
+                    <td>{{emp.FirstName}}&nbsp;{{emp.LastName}}</td>
+                    <td>{{emp.EmailAddress}}</td>
+                    <td>{{emp.TeamName}}</td>
+                    <td>{{emp.TeamManagerName}}</td>
+                    <td>{{emp.StartDate.replace('/Date(','').replace(')/','') | date:"MM-dd-yyyy"}}</td>
+                    <td>{{emp.EndDate.replace('/Date(','').replace(')/','') | date:"MM-dd-yyyy"}}</td>
+                    <td><span ng-class="renderShiftStyle(emp.ShiftName)">{{emp.ShiftName}}</span></td>
+                    <td ng-show="notReportAdmin"><a ng-href="#/EditRoaster/{{emp.Roaster_Id}}" class="glyphicon glyphicon-edit" title="Edit" style="text-decoration:solid !important;"></a>&nbsp;<a ng-click="deleteAttendance(emp.Roaster_Id)" class="glyphicon glyphicon-remove" title="Delete" style="text-decoration: solid !important; cursor: pointer;"></a></td>
+                </tr>
+            </tbody>
+            <tfoot>
+            <td colspan="8">
+                <ul class="pagination pull-right">
+                    <li ng-class="{disabled: currentPage == 0}">
+                        <a href ng-click="prevPage()">« Prev</a>
+                    </li>
+                    <li ng-repeat="n in range(pagedItems.length, currentPage, currentPage + gap)" ng-class="{active: n == currentPage}" ng-click="setPage()">
+                        <a href ng-bind="n + 1">1</a>
+                    </li>
+                    <li ng-class="{disabled: currentPage == pagedItems.length - 1}">
+                        <a href ng-click="nextPage()">Next »</a>
+                    </li>
+                </ul>
+            </td>
+            </tfoot>
+        </table>
+    </div>
+</div>

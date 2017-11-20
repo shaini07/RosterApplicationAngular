@@ -1,0 +1,107 @@
+<header class="navbar navbar-default navbar-fixed-top">
+    <div id="logo" class="lennoxLogo"></div>
+    <div class="headerLogo" style="color: #000000"><h1>Shift Rostering Tool</h1></div>
+    <div class="navbar-default" style="border-width: 1px !important; border-color: #CB123B !important;" ng-show="loggedIn">
+        <div class="container-fluid">
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <span class="glyphicon glyphicon-calendar">
+                            </span>&nbsp;Cab Roster<span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li ng-show="! notAdmin || ! notReportAdmin" ng-class="isHomeMenu ? 'active' : ''">
+                                <a href="#/SearchRoaster">
+                                    <span class="glyphicon glyphicon-search">
+                                    </span>&nbsp;Search Roster
+                                </a>
+                            </li>
+                            <li ng-show="notReportAdmin"  ng-class="isAttendanceMenu ? 'active' : ''">
+                                <a href="#/AddRoaster">
+                                    <span class="glyphicon glyphicon-calendar">
+                                    </span>&nbsp;Add / Edit Roster
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <span class="glyphicon glyphicon-calendar">
+                            </span>&nbsp;Shift Allowance<span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li ng-show="! notAdmin || ! notReportAdmin" ng-class="isAllowanceMenu ? 'active' : ''">
+                                <a href="#/SearchAllowance">
+                                    <span class="glyphicon glyphicon-search">
+                                    </span>&nbsp;Search Allowance
+                                </a>
+                            </li>
+                            <li ng-show="notReportAdmin" ng-class="isAddAllowanceMenu ? 'active' : ''">
+                                <a href="#/AddAllowance">
+                                    <span class="glyphicon glyphicon-time">
+                                    </span>&nbsp;Add / Edit Allowance
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li ng-show="! notAdmin" class="dropdown">
+                        <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <span class="glyphicon glyphicon-user">
+                            </span>&nbsp;Administration<span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li ng-class="isSearchUserMenu ? 'active' : ''">
+                                <a href="#/SearchProfile">
+                                    <span class="glyphicon glyphicon-search">
+                                    </span>&nbsp;Search Profile
+                                </a>
+                            </li>
+                            <li ng-class="isAddUserMenu ? 'active' : ''">
+                                <a href="#/AddProfile">
+                                    <span class="glyphicon glyphicon-user">
+                                    </span>&nbsp;Add / Edit Profile
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+
+                        <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <span class="glyphicon glyphicon-user">
+                            </span>&nbsp;{{loggedInName}}<span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li ng-class="isMyProfileMenu ? 'active' : ''">
+                                <a href="#/MyProfile/{{loggedInId}}">
+                                    <span class="glyphicon glyphicon-user">
+                                    </span>&nbsp;My Profile
+                                </a>
+                            </li>
+                            <li ng-show="notReportAdmin" ng-class="isMyRosterMenu ? 'active' : ''" ng-show="notAdmin">
+                                <a href="#/MyRoster">
+                                    <span class="glyphicon glyphicon-calendar">
+                                    </span>&nbsp;My Roster
+                                </a>
+                            </li>
+                            <li ng-show="notReportAdmin" ng-class="isMyRequestMenu ? 'active' : ''">
+                                <a href="#/MyRequests">
+                                    <span class="glyphicon glyphicon-exclamation-sign">
+                                    </span>&nbsp;My Request
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#/Login">
+                                    <span class="glyphicon glyphicon-log-out">
+                                    </span>&nbsp;Logout
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>

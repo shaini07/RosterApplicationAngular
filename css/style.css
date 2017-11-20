@@ -1,0 +1,189 @@
+
+/*
+    Note: It is best to use a less version of this file ( see http://css2less.cc
+    For the media queries use @screen-sm-min instead of 768px.
+    For .omb_spanOr use @body-bg instead of white.
+*/
+body {
+    font-family: 'Open Sans', sans-serif;
+    padding-top: 150px;
+    background: url("../images/webBackground.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+a[data-disabled=true] {
+  cursor: not-allowed;
+  pointer-events: none;
+  opacity: .65;
+  filter: alpha(opacity=65);
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.loader-container {
+    overflow: visible;
+    max-height: 100%;
+    max-width: 100%;
+}
+
+.center-table {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: 20% !important;
+    height: 20% !important;
+}
+
+@media (min-width: 768px) {
+    /* For desktop: */
+    .headerLogo {
+        padding-left: 38%;
+    }
+
+    .lennoxLogo {
+        background: url("../images/logo.png");
+        background-size: 12% 75%;
+        background-repeat: no-repeat;
+        padding-top: 4%;
+        margin: 0.8% 0% -4.8%;
+    }
+    .omb_row-sm-offset-3 div:first-child[class*="col-"] {
+        margin-left: 25%;
+    }
+}
+
+@media(min-width:1920px) {
+     .headerLogo {
+        padding-left: 42%;
+    }
+    .lennoxLogo {
+        background: rgba(0, 0, 0, 0) url("../images/logo.png") no-repeat scroll 0 0 / 10% 60%;
+        margin: 0.8% 0 -4.6%;
+        padding-top: 4%;
+    }
+}
+
+
+
+
+.repeaterLogo {
+    background: url("../images/lineRepeater.png");
+    background-size: 1px 6px;
+    background-repeat: repeat-x;
+    padding-top: 30px;
+}
+
+
+.omb_login .omb_authTitle {
+    text-align: center;
+    line-height: 300%;
+}
+
+
+
+.omb_login .omb_loginOr {
+    position: relative;
+    font-size: 1.5em;
+    color: #aaa;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+}
+
+    .omb_login .omb_loginOr .omb_hrOr {
+        background-color: #cdcdcd;
+        height: 1px;
+        margin-top: 0px !important;
+        margin-bottom: 0px !important;
+    }
+
+    .omb_login .omb_loginOr .omb_spanOr {
+        display: block;
+        position: absolute;
+        left: 50%;
+        top: -0.6em;
+        margin-left: -1.5em;
+        background-color: white;
+        width: 3em;
+        text-align: center;
+    }
+
+.omb_login .omb_loginForm .input-group.i {
+    width: 2em;
+}
+
+.omb_login .omb_loginForm .help-block {
+    color: red;
+}
+
+
+@media (min-width: 768px) {
+    .omb_login .omb_forgotPwd {
+        text-align: right;
+        margin-top: 10px;
+    }
+}
+
+.header::after {
+    clear: both;
+    content: "";
+    display: table;
+}
+
+.*, *::before, *::after {
+    box-sizing: inherit;
+}
+
+.html:not(.tablet) header {
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 999;
+}
+
+.header.minimal-header {
+    border-bottom: 0 none;
+    text-align: center;
+}
+
+.header {
+    background: #fff none repeat scroll 0 0;
+    padding-left: 20px;
+    padding-right: 20px;
+    transition: height 0.3s ease 0s;
+}
+
+.header {
+    height: 140px;
+    letter-spacing: 0.1em;
+    padding: 32px 0 38px;
+}
+
+.portal-footer {
+    text-align: center;
+}
+
+.footer-copyright {
+    margin-top: 0;
+    padding: 0;
+}
+
+.footer-copyright {
+    color: #2a2a2a;
+    font-family: "AvenirNext",helevetica,arial,sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    padding: 10px 0;
+}
+
+.form-group .help-block {
+    display: none;
+}
+
+.form-group.has-error .help-block {
+    display: block;
+}

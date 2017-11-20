@@ -1,0 +1,122 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <!-- If you delete this meta tag, Half Life 3 will never be released. -->
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Lennox Shift Rostering</title>
+    <link rel="stylesheet" type="text/css" href="http://rchopmgrt1/css/email.css" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans" /> 
+</head>
+<style type="text/css">
+    .rosterTable {
+        font-family: arial, sans-serif !important;
+        border-collapse: collapse !important;
+        width: 100% !important;
+    }
+
+    .rosterTh {
+        border: 1px solid #dddddd !important;
+        text-align: left !important;
+        padding: 8px !important;
+    }
+
+    .rosterTr:nth-child(even) {
+        bgcolor: #dddddd !important;
+    }
+</style>
+<body bgcolor="#628A89">
+    <!-- HEADER -->
+    <table class="head-wrap" bgcolor="#F8F8F8">
+        <tr>
+            <td></td>
+            <td class="header container">
+
+                <div class="content">
+                    <table bgcolor="#F8F8F8">
+                        <tr>
+                            <td><img width="150" height="50" src="http://rchopmgrt1/images/logo.png" /></td>
+                            <td align="right"><h6 class="collapse" style="color: #383838">SHIFT ROSTERING TOOL</h6></td>
+                        </tr>
+                    </table>
+                </div>
+
+            </td>
+            <td></td>
+        </tr>
+    </table><!-- /HEADER -->
+    <!-- BODY -->
+    <br />
+    <br />
+    <table class="body-wrap">
+        <tr>
+            <td></td>
+            <td class="container" bgcolor="#F8F8F8">
+                <div class="content">
+                    <table>
+                        <tr>
+                            <td>
+                                <h3>Hi, @firstName @lastName</h3>
+                                <br />
+                                <p class="lead" style="font-family:Calibri;">You request has been processed by your manager. Please find your below request details</p>
+                                <table class="rosterTable">
+                                    <tr class="rosterTr">
+                                        <th class="rosterTh" bgcolor="#222222" style="color: #CB123B">Employee Id</th>
+                                        <th class="rosterTh" bgcolor="#222222" style="color: #CB123B">Email Id</th>
+                                        <th class="rosterTh" bgcolor="#222222" style="color: #CB123B">From Date</th>
+                                        <th class="rosterTh" bgcolor="#222222" style="color: #CB123B">To Date</th>
+                                        <th class="rosterTh" bgcolor="#222222" style="color: #CB123B">Shift</th>
+                                        <th class="rosterTh" bgcolor="#222222" style="color: #CB123B">Comments</th>
+                                        <th class="rosterTh" bgcolor="#222222" style="color: #CB123B">Status</th>
+                                    </tr>
+                                    <tr class="rosterTr">
+                                        <td class="rosterTh">@employeeId</td>
+                                        <td class="rosterTh">@emailId</td>
+                                        <td class="rosterTh">@fromDate</td>
+                                        <td class="rosterTh">@toDate</td>
+                                        <td class="rosterTh">@shift</td>
+                                        <td class="rosterTh"><p>@comments</p></td>
+                                        <td class="rosterTh"><p>@status</p></td>
+                                    </tr>
+                                </table>
+                                <br />
+                                <p class="lead" style="font-family:Calibri;">
+                                    Please login here to access your roster <a href="http://rchopmgrt1/#/Login">Login Here &raquo;</a>
+                                </p>
+                                <p class="lead" style="font-family:Calibri;">If you forget your password, you can reset it by visiting <a href="http://rchopmgrt1/#/ChangePassword">Change Password &raquo;</a></p>
+                            </td>
+                        </tr>
+                    </table>
+                </div><!-- /content -->
+
+            </td>
+            <td></td>
+        </tr>
+    </table><!-- /BODY -->
+    <!-- FOOTER -->
+    <br />
+    <br />
+    <table class="footer-wrap" bgcolor="#F8F8F8">
+        <tr>
+            <td></td>
+            <td class="container">
+
+                <!-- content -->
+                <div class="content">
+                    <table>
+                        <tr>
+                            <td align="center">
+                                <div style="color: #383838">
+                                    <p>2016 Lennox International Inc.</p>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div><!-- /content -->
+
+            </td>
+            <td></td>
+        </tr>
+    </table><!-- /FOOTER -->
+</body>
+</html>

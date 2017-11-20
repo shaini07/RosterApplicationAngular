@@ -1,0 +1,74 @@
+﻿<title>{{pageTitle}}</title>
+<div class="loader-container">
+    <div loader working="working" message="Loading..." template="5"></div>
+    <form class="jumbotron" name="editAllowanceForm" novalidate>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h4 style="margin-top: -4%; font-weight: bold;">
+                        <span class="glyphicon glyphicon-calendar">
+                        </span>&nbsp;Edit Allowance
+                    </h4>
+                    <div id="lineDiv" class="repeaterLogo"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4">
+                    <div class="form-group" show-errors>
+                        <input type="text" name="employeeId" class="form-control" placeholder="Employee Id" ng-model="employeeId" ng-readonly="notAdmin" id="employeeId" required>
+                        <p class="help-block" ng-if="editAllowanceForm.employeeId.$error.required">Please enter Employee Id</p>
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <input type="email" name="emailAddress" class="form-control" placeholder="Email Address" ng-model="emailAddress" readonly>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-4">
+                    <input type="text" name="firstName" class="form-control" placeholder="First Name" ng-model="firstName" readonly>
+                </div>
+                <div class="col-xs-4">
+                    <input type="text" name="lastName" class="form-control" placeholder="Last Name" ng-model="lastName" readonly>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-xs-4">
+                    <div class="form-group" show-errors>
+                        <input type="text" name="fromDate" class="form-control" placeholder="From Date" ng-model="startDate" uib-datepicker-popup="{{format}}" datepicker-options="dateOptions" is-open="startOpened" ng-click="openStartDateControl()" style="cursor: pointer; background-color:#fff;" readonly required />
+                        <p class="help-block" ng-if="editAllowanceForm.fromDate.$error.required">Please enter from date</p>
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="form-group" show-errors>
+                        <input type="text" name="toDate" class="form-control" placeholder="To Date" ng-model="endDate" uib-datepicker-popup="{{format}}" datepicker-options="dateOptions" is-open="endOpened" ng-click="openEndDateControl()" style="cursor: pointer; background-color: #fff;" readonly required />
+                        <p class="help-block" ng-if="editAllowanceForm.toDate.$error.required">Please enter end date and end date must be greater / equal to start date</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-4">
+                    <div class="form-group" show-errors>
+                        <select class="form-control" name="shift" ng-model="shift" ng-options="shiftNm.ShiftName for shiftNm in shiftLst track by shiftNm.Shift_Id" required>
+                            <option value=""><-- select a shift --></option>
+                        </select>
+                        <p class="help-block" ng-if="editAllowanceForm.shift.$error.required">Please select a Shift</p>
+                    </div>
+                </div>
+                <div class="col-xs-4" ng-show="enableRequest">
+                    <div class="form-group" show-errors>
+                        <textarea name="comments" class="form-control" placeholder="Comments" ng-model="comments" ng-required="enableRequest"></textarea>
+                        <p class="help-block" ng-if="editAllowanceForm.comments.$error.required">Please enter comments</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4">
+                    <p class="submit"><button ng-click="editAllowance()" class="btn btn-primary">Update</button></p>
+                </div>                
+            </div>
+        </div>
+    </form><!--/ Search-->
+</div>

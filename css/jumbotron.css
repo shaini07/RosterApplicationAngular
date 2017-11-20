@@ -1,0 +1,14 @@
+﻿@media (min-width: 768px) {
+    /* For desktop: */    
+    .jumbotron{
+        margin: 0 0 0 23%;
+        max-width: 50%;
+    }
+    
+}
+@media(min-width:1920px) {    
+    .jumbotron{
+        margin: 0 0 0 25%;
+        max-width: 50%;
+    }
+}

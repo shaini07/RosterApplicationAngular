@@ -1,0 +1,113 @@
+<title>{{pageTitle}}</title>
+<div class="loader-container">
+    <div loader working="working" message="Loading..." template="5"></div>
+    <div class="loader-container">
+        <div loader working="working" message="Loading..." template="5"></div>
+        <form class="jumbotron" name="searchProfile" novalidate>
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h4 style="margin-top: -4%; font-weight: bold;">
+                            <span class="glyphicon glyphicon-search">
+                            </span>&nbsp;Search Profile
+                        </h4>
+                        <div id="lineDiv" class="repeaterLogo"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-4">
+                        <input type="text" class="form-control" placeholder="First Name" uib-typeahead="firstNm.FirstName for firstNm in searchLst | filter:$viewValue | limitTo:5 | unique:'FirstName'" ng-model="searchProfile.firstName">
+                    </div>
+                    <div class="col-xs-4">
+                        <input type="text" class="form-control" placeholder="Last Name" uib-typeahead="lastNm.LastName for lastNm in searchLst | filter:$viewValue | limitTo:5 | unique:'LastName'" ng-model="searchProfile.lastName">
+                    </div>
+                    <div class="col-xs-4">
+                        <input type="email" class="form-control" placeholder="Email Address" uib-typeahead="emailAd.EmailAddress for emailAd in searchLst | filter:$viewValue | limitTo:5 | unique:'EmailAddress'" ng-model="searchProfile.emailAddress">
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-xs-4">
+                        <input type="text" class="form-control" placeholder="Employee Id" uib-typeahead="empId.EmployeeId for empId in searchLst | filter:$viewValue | limitTo:5 | unique:'EmployeeId'" ng-model="searchProfile.employeeId" id="employeeId">
+                    </div>
+                    <div class="col-xs-4">
+                        <select class="form-control" name="manager" ng-model="searchProfile.TeamManager" ng-options="mgrNm.TeamManagerName for mgrNm in teamLst | unique:'TeamManagerName'" required>
+                            <option value="">All</option>
+                        </select>
+                    </div>
+                    <div class="col-xs-4">
+                        <select class="form-control" name="team" ng-model="searchProfile.Team" ng-options="teamNm.TeamName for teamNm in teamLst track by teamNm.Team_Id" required>
+                            <option value="">All</option>
+                        </select>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-xs-4">
+                        <p class="submit"><button class="btn btn-primary" ng-click="submit()">Search</button></p>
+                    </div>
+                </div>
+            </div>
+        </form><!--/ Search-->
+        <div ng-switch="(pagedItems).length" ng-show="showGrid">
+            <span ng-switch-when="0" style="color: #EEEEEE;font-weight:bold;">No Employees found</span>
+            <table class="table table-striped thead-inverse center-table" style="background-color: #EEEEEE; border-radius:6px;" ng-switch-default>
+                <thead>
+                    <tr>
+                        <th>Employee Id</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email Address</th>
+                        <th>Reporting Manager</th>
+                        <th class="col-md-4">Reporting Team</th>
+                        <th>Primary Contact</th>
+                        <th>Secondary Contact</th>
+                        <th class="col-md-6">Contact Address</th>
+                        <th>Location</th>
+                        <th>City</th>
+                        <th>Zip</th>
+                        <th>Country</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="emp in pagedItems[currentPage]">
+                        <td>{{emp.EmployeeId}}</td>
+                        <td>{{emp.FirstName}}</td>
+                        <td>{{emp.LastName}}</td>
+                        <td>{{emp.EmailAddress}}</td>
+                        <td>{{emp.TeamManagerName}}</td>
+                        <td>{{emp.TeamName}}</td>
+                        <td>{{emp.ContactNumber}}</td>
+                        <td>{{emp.AlternateNumber}}</td>
+                        <td>
+                            <p>
+                                {{emp.Address1}}, {{emp.Address2}}
+                            </p>
+                        </td>
+                        <td>{{emp.Landmark}}</td>
+                        <td>{{emp.City}}</td>
+                        <td>{{emp.Zip}}</td>
+                        <td>{{emp.Country}}</td>
+                        <td><a ng-href="#/EditProfile/{{emp.Profile_Id}}" class="glyphicon glyphicon-edit" title="Edit" style="text-decoration:solid !important;"></a>&nbsp;<a ng-click="deleteUser(emp.Profile_Id,emp.Mapping_Id)" class="glyphicon glyphicon-remove" title="Delete" style="text-decoration: solid !important; cursor: pointer;"></a></td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                <td colspan="11">
+                    <ul class="pagination pull-right">
+                        <li ng-class="{disabled: currentPage == 0}">
+                            <a href ng-click="prevPage()"><< Prev</a>
+                        </li>
+                        <li ng-repeat="n in range(pagedItems.length, currentPage, currentPage + gap)" ng-class="{active: n == currentPage}" ng-click="setPage()">
+                            <a href ng-bind="n + 1">1</a>
+                        </li>
+                        <li ng-class="{disabled: currentPage == pagedItems.length - 1}">
+                            <a href ng-click="nextPage()">Next >></a>
+                        </li>
+                    </ul>
+                </td>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
